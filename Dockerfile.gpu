@@ -13,6 +13,7 @@ ARG TORCH_VERSION=latest
 
 # Install some dependencies
 RUN apt-get update && apt-get install -y \
+		sudo \
 		bc \
 		build-essential \
 		cmake \
@@ -108,21 +109,22 @@ ENV LUA_PATH='/root/.luarocks/share/lua/5.1/?.lua;/root/.luarocks/share/lua/5.1/
 ENV LUA_CPATH='/root/torch/install/lib/?.so;'$LUA_CPATH
 
 # Install the latest versions of nn, cutorch, cunn, cuDNN bindings and iTorch
-RUN luarocks install nn && \
+RUN luarocks install torch && \
+	luarocks install nn && \
 	luarocks install cutorch && \
 	luarocks install cunn && \
-    luarocks install loadcaffe && \
 	\
 	cd /root && git clone https://github.com/soumith/cudnn.torch.git && cd cudnn.torch && \
-	git checkout R4 && \
 	luarocks make && \
 	\
 	cd /root && git clone https://github.com/facebook/iTorch.git && \
 	cd iTorch && \
-	luarocks make
-
+	luarocks make && \
+	luarocks install colormap && \
+	luarocks install optnet && \
+	luarocks install hdf5
+	
 RUN luarocks install torchx
-RUN luarocks install luabitop
 RUN luarocks install dpnn
 RUN luarocks install optim
 
