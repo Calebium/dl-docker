@@ -121,10 +121,10 @@ RUN luarocks install nn && \
 	cd iTorch && \
 	luarocks make
 
-RUN luarocks install cudnn
 RUN luarocks install torchx
 RUN luarocks install luabitop
 RUN luarocks install dpnn
+RUN luarocks install optim
 
 # Set up notebook config
 COPY jupyter_notebook_config.py /root/.jupyter/
