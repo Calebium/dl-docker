@@ -1,1 +1,1 @@
-docker build -t floydhub/dl-docker:gpu -f Dockerfile.gpu .
+docker build -t gregj/dl-docker -f Dockerfile.gpu .
