@@ -131,6 +131,7 @@ RUN luarocks install nn && \
 RUN luarocks install torchx
 RUN luarocks install dpnn
 RUN luarocks install optim
+RUN luarocks install luabitop
 
 # Set up notebook config
 COPY jupyter_notebook_config.py /root/.jupyter/
